@@ -25,11 +25,11 @@ namespace HTTPServer
 
         public void StartServer()
         {
+            Console.WriteLine("Starting . . .");
             // TODO: Listen to connections, with large backlog.
-
-            // TODO: Accept connections in while loop and start a thread for each connection on function "Handle Connection"
             serverSocket.Listen(100);
-
+            // TODO: Accept connections in while loop and start a thread for each connection on function "Handle Connection"
+            
             while (true)
             {
                 //TODO: accept connections and start thread for each accepted connection.
@@ -46,7 +46,7 @@ namespace HTTPServer
             Socket clientSocket = (Socket)obj;
             clientSocket.ReceiveTimeout = 0;
             // TODO: receive requests in while true until remote client closes the socket.
-            Console.WriteLine("Connection Started with Client: ", clientSocket.RemoteEndPoint);
+            Console.WriteLine("Connection Started with Client:{0} ", clientSocket.RemoteEndPoint);
             while (true)
             {
                 try
@@ -57,15 +57,17 @@ namespace HTTPServer
                     // TODO: break the while loop if receivedLen==0
                     if(receivedLen == 0)
                     {
-                        Console.WriteLine("Connection Ended By Client : ",clientSocket.RemoteEndPoint);
+                        Console.WriteLine("Connection Ended By Client :{0} ",clientSocket.RemoteEndPoint);
                         break;
                     }
                     // TODO: Create a Request object using received request string
                     Request request = new Request(Encoding.ASCII.GetString(receivedData));
+                    
                     // TODO: Call HandleRequest Method that returns the response
                     Response response = HandleRequest(request);
                     // TODO: Send Response back to client
                     clientSocket.Send(Encoding.ASCII.GetBytes(response.ResponseString));
+                   // Console.WriteLine("Response : \n{0}",response.ResponseString);
                 }
                 catch (Exception ex)
                 {

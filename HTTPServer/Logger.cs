@@ -15,6 +15,8 @@ namespace HTTPServer
             //Datetime:
             //message:
             // for each exception write its details associated with datetime 
+            File.AppendAllLines("Log.txt", new List<string>() { DateTime.Now + " : " + ex.Message + System.Environment.NewLine });
+
         }
     }
 }

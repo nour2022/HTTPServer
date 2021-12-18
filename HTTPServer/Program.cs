@@ -11,7 +11,7 @@ namespace HTTPServer
         static void Main(string[] args)
         {
             // TODO: Call CreateRedirectionRulesFile() function to create the rules of redirection 
-
+            CreateRedirectionRulesFile();
             //Start server
             // 1) Make server object on port 1000
             int port = 1000;
